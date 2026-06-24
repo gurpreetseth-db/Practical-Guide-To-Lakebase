@@ -1,0 +1,27 @@
+bundle:
+  name: lakebase-lab-300
+
+include:
+  - resources/*.yml
+
+# This bundle deploys the lab notebooks into a workspace path so an instructor
+# (or learner) can run them without manually importing each .py file.
+#
+# Deploy with:   databricks bundle deploy --target dev --profile <your-profile>
+# Run a notebook: open Workspace → /Workspace/Users/<you>/.bundle/lakebase-lab-300/dev/files/
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://dbc-6ccb87fa-c086.cloud.databricks.com/
+      # Override with --profile flag at deploy time, or set workspace.profile here.
+
+  prod:
+    mode: production
+    workspace:
+      host: https://<your-workspace>.cloud.databricks.com
+    # In prod mode, lock to a specific user/SP for the lab artifacts.
+    # run_as:
+    #   user_name: lab-instructor@example.com
